@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.listen(3006, () => console.log('Server Started'));
+app.listen(3004, () => console.log('Server Started'));
 
 getCurrentTimeFromStamp = (timestamp) => {
     return new Date(parseInt(timestamp, 10))
@@ -13,23 +13,23 @@ const isoToUnix = (d) => {
 app.get('/ec2-user/awsPractice/api/:date?', (req, res) => {
     let unix_stamp = '';
     let string_date = '';
-    if (req.params.date) {
-        if (isNaN(req.params.date)) {
-            const isVAlid = new Date(req.params.date);
-            if (isVAlid.getTime() === isVAlid.getTime()) {
-
-                unix_stamp = isoToUnix(req.params.date);
-                string_date = (new Date(req.params.date));
+    const urlDate = req.params.date;
+    if (urlDate) {
+        if (isNaN(urlDate)) {
+            const isValid = new Date(urlDate);
+            if (isValid.getTime() === isValid.getTime()) {
+                unix_stamp = isoToUnix(urlDate);
+                string_date = (new Date(urlDate));
                 res.send(`{ "unix" : "${unix_stamp}" , "utc" : "${string_date}" }`);
             } else {
                 res.send({ "Error": "Invalid Date" });
             }
         }
         else {
-            const isVAlid = new Date(parseInt(req.params.date));
-            if ((isVAlid).getTime() === (isVAlid).getTime()) {
-                string_date = getCurrentTimeFromStamp(req.params.date);
-                unix_stamp = req.params.date;
+            const isValid = new Date(parseInt(urlDate));
+            if ((isValid).getTime() === (isValid).getTime()) {
+                string_date = getCurrentTimeFromStamp(urlDate);
+                unix_stamp = urlDate;
                 res.send(`{ "unix" : "${unix_stamp}" , "utc" : "${string_date}" }`);
 
             } else {
