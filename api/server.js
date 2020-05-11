@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.listen(3004, () => console.log('Server Started'));
+app.listen(3006, () => console.log('Server Started'));
 
 getCurrentTimeFromStamp = (timestamp) => {
     return new Date(parseInt(timestamp, 10))
