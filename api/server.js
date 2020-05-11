@@ -10,7 +10,7 @@ const isoToUnix = (d) => {
     console.log("date",d);
         return Date.parse(d)
 }
-app.get('/abc/:date?',  (req, res) => {
+app.get('/ec2-user/awsPractice/api/:date?',  (req, res) => {
     let unix_stamp = '';
     let string_date = '';
     if(req.params.date){
