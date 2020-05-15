@@ -26,11 +26,12 @@ class Body extends Component{
     inputMapper = () => INPUTS.map((input)=><div key={input.id}>{input.name}:<input type={input.type} onChange={(value)=>this.change(value)} placeholder={input.name}></input> </div>)
                 
     render() {
+        const {sideText}=this.state
         return (
             <div className="body-container">
                 {this.inputMapper()}
                 <Footer clicked={this.show}/>
-                {this.state.toBeShown && <div>{this.state.sideText}</div>}
+                {this.state.toBeShown && <div>{sideText}</div>}
             </div>
         )
     }
