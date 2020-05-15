@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Body from './body';
-import Footer from './footer';
-import './App.css';
 
+import Body from './body';
+
+import './App.css';
 
 
 class App extends Component{

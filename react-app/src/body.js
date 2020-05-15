@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import Footer from './footer';
+
 import './App.css';
 
 const INPUTS = [{
@@ -12,6 +14,7 @@ const INPUTS = [{
     name: 'Password',
     type:'password'
   }];
+  
 class Body extends Component{
     state={
         sideText:'',

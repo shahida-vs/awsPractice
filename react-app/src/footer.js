@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './App.css'
 
 const BUTTONS = [{
@@ -11,6 +12,7 @@ const BUTTONS = [{
     name: 'Submit',
     type:'submit'
   }];
+  
 class Footer extends Component {
     buttonMapper = (clicked) => BUTTONS.map((item)=><button key={item.id} onClick={clicked} style={{ height: 30 }}  >{item.name}</button>)
     render() {
