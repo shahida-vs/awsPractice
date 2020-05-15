@@ -12,7 +12,7 @@ const BUTTONS = [{
     type:'submit'
   }];
 class Footer extends Component {
-    buttonMapper = (clicked) => BUTTONS.map((item)=><button style={{ height: 30 }} onClick={clicked} key={item.id}>{item.name}</button>)
+    buttonMapper = (clicked) => BUTTONS.map((item)=><button key={item.id} onClick={clicked} style={{ height: 30 }}  >{item.name}</button>)
     render() {
         const {clicked} = this.props;
         return (

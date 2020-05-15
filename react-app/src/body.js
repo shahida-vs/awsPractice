@@ -23,7 +23,7 @@ class Body extends Component{
     show = () => {
        this.setState({toBeShown:true})
     }
-    inputMapper = () => INPUTS.map((input)=><div key={input.id}>{input.name}:<input type={input.type} onChange={(value)=>this.change(value)} placeholder={input.name}></input> </div>)
+    inputMapper = () => INPUTS.map((input)=><div key={input.id}>{input.name}:<input onChange={(value)=>this.change(value)} placeholder={input.name} type={input.type}></input> </div>)
                 
     render() {
         const {sideText}=this.state
