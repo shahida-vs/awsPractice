@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import './App.css'
 
+const BUTTONS = [{
+    id: 'btn1',
+    name: 'Reset',
+    type:'reset',
+  },
+  {
+    id: 'btn2',
+    name: 'Submit',
+    type:'submit'
+  }];
 class Footer extends Component {
-    resetPressed = () => {
-        console.log("Reset Pressed");
-        
-      }
-       submitPressed = () => {
-        console.log("Submit Pressed");
-        
-      }
+    buttonMapper = (clicked) => BUTTONS.map((item)=><button style={{ height: 30 }} onClick={clicked} key={item.id}>{item.name}</button>)
     render() {
+        const {clicked} = this.props;
         return (
-            <div style={{ height: '30%', display: 'flex', width: '100%', justifyContent: 'space-around' }}>
-                <button style={{ height: 30 }} onClick={this.resetPressed}>Reset</button>
-                <button style={{ height: 30 }} onClick={this.submitPressed}>Submit</button>
+            <div className="footer-container">
+                {this.buttonMapper(clicked)}
             </div>
         )
     }
