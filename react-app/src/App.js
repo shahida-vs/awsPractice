@@ -12,7 +12,7 @@ class App extends Component{
     <div className="App" >
       <div className="form-layout">
         <div className="header-container"> Login</div>
-        <Body />
+        <Body check={123}/>
       </div>
     </div>
   );

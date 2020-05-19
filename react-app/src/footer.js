@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {identity} from 'lodash';
 
 import './App.css'
 
@@ -12,11 +13,14 @@ const BUTTONS = [{
     name: 'Submit',
     type:'submit'
   }];
-  
+const defaultProps = {
+    //clicked:()=>{console.log("default function");}
+    clicked:identity
+};
 class Footer extends Component {
-    buttonMapper = (clicked) => BUTTONS.map((item)=><button key={item.id} onClick={clicked} style={{ height: 30 }}  >{item.name}</button>)
+    buttonMapper = (clicked) => BUTTONS.map(({id='',name=''})=><button key={id} onClick={clicked} style={{ height: 30 }}  >{name}</button>)
     render() {
-        const {clicked} = this.props;
+        const {clicked = ''} = this.props;
         return (
             <div className="footer-container">
                 {this.buttonMapper(clicked)}
@@ -24,4 +28,6 @@ class Footer extends Component {
         )
     }
 }
+
+Footer.defaultProps = defaultProps;
 export default Footer;

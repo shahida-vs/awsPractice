@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Footer from './footer';
 
@@ -14,7 +15,12 @@ const INPUTS = [{
     name: 'Password',
     type:'password'
   }];
-  
+  const defaultProps = {
+      check:'ab'
+  };
+  const propTypes = {
+      check:PropTypes.string
+  }
 class Body extends Component{
     state={
         sideText:'',
@@ -26,12 +32,14 @@ class Body extends Component{
     show = () => {
        this.setState({toBeShown:true})
     }
-    inputMapper = () => INPUTS.map((input)=><div key={input.id}>{input.name}:<input onChange={(value)=>this.change(value)} placeholder={input.name} type={input.type}></input> </div>)
+    inputMapper = () => INPUTS.map(({id='',name='',type=''})=><div key={id}>{name}:<input onChange={(value)=>this.change(value)} placeholder={name} type={type}></input> </div>)
                 
     render() {
-        const {sideText}=this.state
+        const {sideText = ''}=this.state
+        const {check} = this.props;
         return (
             <div className="body-container">
+                default props : {check}
                 {this.inputMapper()}
                 <Footer clicked={this.show}/>
                 {this.state.toBeShown && <div>{sideText}</div>}
@@ -39,4 +47,7 @@ class Body extends Component{
         )
     }
 }
+
+Body.defaultProps=defaultProps
+Body.propTypes = propTypes
 export default Body;
