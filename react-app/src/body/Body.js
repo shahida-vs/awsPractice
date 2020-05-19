@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Footer from './footer';
+import Footer from '../footer/Footer';
 
-import './App.css';
+import '../App.css';
 
 const INPUTS = [{
     id: 'inp1',
@@ -35,14 +35,14 @@ class Body extends Component{
     inputMapper = () => INPUTS.map(({id='',name='',type=''})=><div key={id}>{name}:<input onChange={(value)=>this.change(value)} placeholder={name} type={type}></input> </div>)
                 
     render() {
-        const {sideText = ''}=this.state
+        const {sideText = '',toBeShown = false}=this.state
         const {check} = this.props;
         return (
             <div className="body-container">
                 default props : {check}
                 {this.inputMapper()}
                 <Footer clicked={this.show}/>
-                {this.state.toBeShown && <div>{sideText}</div>}
+                {toBeShown && <div>{sideText}</div>}
             </div>
         )
     }

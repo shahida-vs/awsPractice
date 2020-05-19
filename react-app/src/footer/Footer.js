@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {identity} from 'lodash';
 
-import './App.css'
+import '../App.css'
 
 const BUTTONS = [{
     id: 'btn1',

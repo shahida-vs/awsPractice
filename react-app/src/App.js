@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Body from './body';
+import Body from './body/Body';
 
 import './App.css';
 
