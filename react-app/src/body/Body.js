@@ -36,7 +36,7 @@ class Body extends Component{
                 
     render() {
         const {sideText = '',toBeShown = false}=this.state
-        const {check} = this.props;
+        const {check = false} = this.props;
         return (
             <div className="body-container">
                 default props : {check}
