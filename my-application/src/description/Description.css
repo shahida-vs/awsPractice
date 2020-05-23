@@ -1,0 +1,22 @@
+
+.description-body{
+    color: rgb(134,44,55);
+    font-size: 45px;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.description-container{
+    height: 100%;
+    width: 100%;
+}
+
+.description-head{
+  color:rgb(151,156,159);
+  font-size: 55px;
+  font-weight: 600;
+  margin-left: 20px;
+  padding: 10px;
+}
