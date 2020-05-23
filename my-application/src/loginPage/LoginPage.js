@@ -35,7 +35,7 @@ class LoginPage extends Component {
     textChange = (evt) => {
         this.setState({ [evt.target.name]: evt.target.value }, () => {
             const { email = '', password = '' } = this.state;
-            let checkEmptyFields = !(email.length && password.length);
+            const checkEmptyFields = !(email.length && password.length);
             this.setState({ emptyFields: checkEmptyFields });
         })
         this.setState({ error: '' });
@@ -54,7 +54,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        const { emptyFields = '', error = '' } = this.state;
+        const { emptyFields = true, error = '' } = this.state;
         return (
             <form className='App'  >
                 {this.inputMapper()}
