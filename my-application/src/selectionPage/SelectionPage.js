@@ -26,12 +26,12 @@ class SelectionPage extends Component {
         selectedCategory: '',
         subItems: ''
     }
-    handleClicked = (category, key) => {
+    handleClicked = (category = '', key = '') => {
         this.setState({ selectedCategory: category, subItems: dummyData.categories[key].items })
     }
     categorySection = () => {
         const { selectedCategory = '' } = this.state;
-        return CATEGORIES.map(({ name, id }) => <div className={selectedCategory === name ? "selected-box" : "box"} key={id} onClick={() => this.handleClicked(name, id)}>{name}</div>)
+        return CATEGORIES.map(({ name = '', id = '' }) => <div className={selectedCategory === name ? "selected-box" : "box"} key={id} onClick={() => this.handleClicked(name, id)}>{name}</div>)
     }
     clearChoice = () => {
         this.setState({ selectedCategory: '', subItems: '' });

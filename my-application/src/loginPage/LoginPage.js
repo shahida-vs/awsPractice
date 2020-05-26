@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { get, set, cloneDeep } from 'lodash';
+
 import '../App.css'
 
 const CREDENTIALS = {
@@ -20,6 +22,8 @@ const INPUT_BOXES = [
     }
 ];
 
+
+
 class LoginPage extends Component {
     state = {
         email: '',
@@ -29,19 +33,19 @@ class LoginPage extends Component {
     }
 
     inputMapper = () => {
-        return INPUT_BOXES.map(({ id, name, type }) => (<InputBox key={id} name={name} type={type} textChange={this.textChange} />));
+        return INPUT_BOXES.map(({ id = '', name = '', type = '' }) => (<InputBox key={id} name={name} type={type} textChange={this.textChange} />));
     }
 
-    textChange = (evt) => {
-        this.setState({ [evt.target.name]: evt.target.value }, () => {
+    textChange = (evt = {}) => {
+        this.setState({ [get(evt, ["target", "name"], 'KEY_NOT_FOUND')]: get(evt, ["target", "value"], '') }, () => {
             const { email = '', password = '' } = this.state;
-            const checkEmptyFields = !(email.length && password.length);
-            this.setState({ emptyFields: checkEmptyFields });
+            const emptyFields = !(email.length && password.length);
+            this.setState({ emptyFields });
         })
         this.setState({ error: '' });
     }
 
-    validate = (event) => {
+    validate = (event = {}) => {
         event.preventDefault();
         const { email = '', password = '' } = this.state;
         const { setRegistered = '' } = this.props;
@@ -65,13 +69,13 @@ class LoginPage extends Component {
     }
 }
 
-function InputBox({ name, textChange, type }) {
+function InputBox({ name = '', textChange = () => { }, type = '' }) {
     return (
         <input className="input-box" name={name} onChange={(evt) => textChange(evt)} placeholder={name} type={type} />
     );
 }
 
-function LoginBox({ emptyFields, validate }) {
+function LoginBox({ emptyFields = true, validate = () => { } }) {
     return (
         < input className={emptyFields ? "white-login-box" : "green-login-box"} onClick={validate} type="submit" value="Login" />
     )
