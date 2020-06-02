@@ -27,7 +27,7 @@ class SelectionPage extends Component {
 
     handleClicked = (category = '', key = '') => {
         //this.setState({ selectedCategory: category, subItems: dummyData.categories[key].items })
-        const { setSelectedCategory } = this.props;
+        const { setSelectedCategory = () => { } } = this.props;
         setSelectedCategory({ selectedCategory: category, subItems: dummyData.categories[key].items, selectedSubCategory: '' })
     }
     categorySection = () => {
@@ -36,7 +36,7 @@ class SelectionPage extends Component {
     }
     clearChoice = () => {
         // this.setState({ selectedCategory: '', subItems: '' });
-        const { setSelectedCategory } = this.props;
+        const { setSelectedCategory = () => { } } = this.props;
         setSelectedCategory({ selectedCategory: '', subItems: '', didSelectionChange: false })
     }
     render() {

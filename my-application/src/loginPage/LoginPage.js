@@ -34,14 +34,14 @@ class LoginPage extends Component {
     }
     componentWillReceiveProps = (nextProps) => {
         const { email = '', password = '' } = nextProps.loginReducer;
-        const { userLogin } = this.props;
+        const { userLogin = () => { } } = this.props;
         if (email !== this.props.loginReducer.email || password !== this.props.loginReducer.password) {
             const emptyFields = !(email.length && password.length);
             userLogin({ emptyFields });
         }
     }
     textChange = (evt = {}) => {
-        const { userLogin } = this.props
+        const { userLogin = () => { } } = this.props
         userLogin({ [get(evt, ["target", "name"], 'KEY_NOT_FOUND')]: get(evt, ["target", "value"], '') })
         userLogin({ error: '' });
     }
@@ -49,7 +49,7 @@ class LoginPage extends Component {
     validate = (event = {}) => {
         event.preventDefault();
         const { email = '', password = '' } = this.props.loginReducer;
-        const { setRegistered = '', userLogin } = this.props;
+        const { setRegistered = () => { }, userLogin = () => { } } = this.props;
         if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
             setRegistered();
         }

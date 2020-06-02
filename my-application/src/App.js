@@ -11,7 +11,7 @@ import './App.css';
 class App extends Component {
   setRegistered = () => {
     //this.setState({ isRegisteredUser: true });
-    const { login_user } = this.props;
+    const { login_user = () => { } } = this.props;
     login_user({ isRegisteredUser: true })
   }
 

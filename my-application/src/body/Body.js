@@ -9,7 +9,7 @@ import './Body.css'
 class Body extends Component {
 
     handleSelect = (description = "", name = '') => {
-        const { setSelectedCategory } = this.props
+        const { setSelectedCategory = () => { } } = this.props
         setSelectedCategory({ selectedSubCategory: name, description: description })
     }
 
