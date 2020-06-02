@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { get, set, cloneDeep } from 'lodash';
+
+import { login } from '../actions/LoginPageAction';
 
 import '../App.css'
 
@@ -25,40 +28,38 @@ const INPUT_BOXES = [
 
 
 class LoginPage extends Component {
-    state = {
-        email: '',
-        emptyFields: true,
-        error: '',
-        password: '',
-    }
 
     inputMapper = () => {
         return INPUT_BOXES.map(({ id = '', name = '', type = '' }) => (<InputBox key={id} name={name} type={type} textChange={this.textChange} />));
     }
-
-    textChange = (evt = {}) => {
-        this.setState({ [get(evt, ["target", "name"], 'KEY_NOT_FOUND')]: get(evt, ["target", "value"], '') }, () => {
-            const { email = '', password = '' } = this.state;
+    componentWillReceiveProps = (nextProps) => {
+        const { email = '', password = '' } = nextProps.loginReducer;
+        const { userLogin } = this.props;
+        if (email !== this.props.loginReducer.email || password !== this.props.loginReducer.password) {
             const emptyFields = !(email.length && password.length);
-            this.setState({ emptyFields });
-        })
-        this.setState({ error: '' });
+            userLogin({ emptyFields });
+        }
+    }
+    textChange = (evt = {}) => {
+        const { userLogin } = this.props
+        userLogin({ [get(evt, ["target", "name"], 'KEY_NOT_FOUND')]: get(evt, ["target", "value"], '') })
+        userLogin({ error: '' });
     }
 
     validate = (event = {}) => {
         event.preventDefault();
-        const { email = '', password = '' } = this.state;
-        const { setRegistered = '' } = this.props;
+        const { email = '', password = '' } = this.props.loginReducer;
+        const { setRegistered = '', userLogin } = this.props;
         if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
             setRegistered();
         }
         else {
-            this.setState({ error: ERROR_MESSAGE });
+            userLogin({ error: ERROR_MESSAGE });
         }
     }
 
     render() {
-        const { emptyFields = true, error = '' } = this.state;
+        const { emptyFields = true, error = '' } = this.props.loginReducer;
         return (
             <form className='App'  >
                 {this.inputMapper()}
@@ -81,4 +82,14 @@ function LoginBox({ emptyFields = true, validate = () => { } }) {
     )
 }
 
-export default LoginPage;
+const mapStateToProps = (store) => {
+    return {
+        loginReducer: store.LoginReducer
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userLogin: (value) => dispatch(login(value))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

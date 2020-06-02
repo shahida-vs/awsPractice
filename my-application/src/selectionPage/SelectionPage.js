@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Body from '../body/Body';
+import { selectCategory } from '../actions/SelectionPageAction'
 
 import dummyData from '../sampleData.json'
 
@@ -22,22 +24,23 @@ const CATEGORIES = [
 ]
 
 class SelectionPage extends Component {
-    state = {
-        selectedCategory: '',
-        subItems: ''
-    }
+
     handleClicked = (category = '', key = '') => {
-        this.setState({ selectedCategory: category, subItems: dummyData.categories[key].items })
+        //this.setState({ selectedCategory: category, subItems: dummyData.categories[key].items })
+        const { setSelectedCategory } = this.props;
+        setSelectedCategory({ selectedCategory: category, subItems: dummyData.categories[key].items, selectedSubCategory: '' })
     }
     categorySection = () => {
-        const { selectedCategory = '' } = this.state;
+        const { selectedCategory = '' } = this.props.selectReducer;
         return CATEGORIES.map(({ name = '', id = '' }) => <div className={selectedCategory === name ? "selected-box" : "box"} key={id} onClick={() => this.handleClicked(name, id)}>{name}</div>)
     }
     clearChoice = () => {
-        this.setState({ selectedCategory: '', subItems: '' });
+        // this.setState({ selectedCategory: '', subItems: '' });
+        const { setSelectedCategory } = this.props;
+        setSelectedCategory({ selectedCategory: '', subItems: '', didSelectionChange: false })
     }
     render() {
-        const { selectedCategory = '', subItems = '' } = this.state;
+        const { selectedCategory = '', subItems = '' } = this.props.selectReducer;
         return (
             <div className="container">
                 <div className='top-section'>
@@ -47,11 +50,21 @@ class SelectionPage extends Component {
                     </div>
                 </div>
                 <div className="body">
-                    <Body selectedCategory={selectedCategory} subItems={subItems} />
+                    <Body />
                 </div>
             </div>
         )
     }
 }
 
-export default SelectionPage
+const mapStateToProps = (store) => {
+    return {
+        selectReducer: store.SelectionReducer
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSelectedCategory: (value) => dispatch(selectCategory(value))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SelectionPage);
