@@ -14,7 +14,7 @@ class Body extends Component {
     }
 
     subCategories = () => {
-        const { subItems = '', selectedSubCategory = '' } = this.props.selectReducer;
+        const { selectedSubCategory = '', subItems = '' } = this.props.selectReducer;
         return subItems.map(({ description = '', id = '', name = '' }) => <div className={selectedSubCategory === name ? "selected-sub-category-box" : "sub-category-box"} key={id} onClick={() => this.handleSelect(description, name)}>{name}</div>)
     }
 
