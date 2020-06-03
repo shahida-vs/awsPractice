@@ -1,0 +1,12 @@
+.button-box{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    background-color:rgb(132,135,139);
+    align-items: center;
+    outline:1px solid black;
+    font-size: 25px;
+    color: white;
+    font-weight: 600;
+}
